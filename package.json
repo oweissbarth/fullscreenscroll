@@ -1,0 +1,23 @@
+{
+  "name": "fullscreenscroll",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-minify": "^2.1.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-typescript": "^4.0.1",
+    "typescript": "^2.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oweissbarth/fullscreenscroll.git"
+  },
+  "author": "Oliver Weissbarth",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oweissbarth/fullscreenscroll/issues"
+  },
+  "homepage": "https://github.com/oweissbarth/fullscreenscroll#readme"
+}

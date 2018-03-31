@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+	<title>fullscreenscroll</title>
+	<script src="dist/fullscreenscroll.js"></script>
+
+	<style>
+		body{
+			margin: 0;
+		}
+
+		section{
+			height: 100vh;
+		}
+
+		.one{
+			background-color: #a53535;
+		}
+
+		.two{
+			background-color: #6868cc;
+		}
+
+		.three{
+			background-color: #6dd26d;
+		}
+
+		h1{
+			padding: 2em;
+			margin: 0;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div class="fullscreenscroll">
+		<section class="one">
+			<h1>First Slide </h1>
+		</section>
+
+		<section class="two">
+			<h1>Second Slide</h1>
+		</section>
+
+		<section class="three">
+			<h1>Third Slide</h1>
+		</section>
+	</div>
+
+	<script>
+		var fss = new FullScreenScroll(document.getElementsByClassName("fullscreenscroll")[0]);
+	</script>
+</body>
+</html>
