@@ -5,8 +5,13 @@ class FullScreenScroll{
   scrolling: boolean
   timeout: number
 
-   constructor(container: HTMLElement){
-     this.slides = [].slice.call(container.children)
+  touchThreshold: number
+
+  touchstart: number
+
+   constructor(container: HTMLElement, touchThreshold = 100){
+     this.slides = [].slice.call(container.children);
+     this.touchThreshold = touchThreshold;
      this.current = 0;
      this.registerEventListeners();
      this.removeScrollBars();
@@ -21,7 +26,8 @@ class FullScreenScroll{
       window.addEventListener("keydown", this.handleKeyPressed.bind(this), false);
 
       /* Touch experience*/
-
+      window.addEventListener("touchstart", this.touchStartHandler.bind(this), false);
+      window.addEventListener("touchmove", this.touchMoveHandler.bind(this), false)
 
 
    }
@@ -39,23 +45,32 @@ class FullScreenScroll{
    }
 
    public moveDown(){
+     console.log("down");
+
     this.scrolling = true;
     this.current = Math.min(this.current+1, this.slides.length-1);
     this.scrollTo(document.scrollingElement, this.slides[this.current].offsetTop, 2000);
+    console.log("down end");
 
    }
 
    public moveUp(){
+    console.log("up");
     this.scrolling = true;
 
     this.current = Math.max(this.current-1, 0);
     this.scrollTo(document.scrollingElement, this.slides[this.current].offsetTop, 2000);
+    console.log("up end");
    }
 
    public moveBack(){
+     console.log("back");
+
     this.scrolling = true;
     this.scrollTo(document.scrollingElement, this.slides[this.current].offsetTop, 500);
     this.timeout = null;
+    console.log("back end");
+
    }
 
 
@@ -76,6 +91,26 @@ class FullScreenScroll{
       }
       };
       animateScroll();
+   }
+
+   private touchStartHandler(e: TouchEvent){
+     if(this.scrolling){return;}
+     this.touchstart = e.touches[0].clientY;
+     console.log("touchstart at ", this.touchstart);
+   }
+
+   private touchMoveHandler(e: TouchEvent){
+     clearTimeout(this.timeout);
+     if(this.scrolling){return}
+     var touchpos = e.touches[0].clientY;
+     console.log("touchstart: ", this.touchstart, " touchpos: ", touchpos);
+     if(touchpos - this.touchstart >= this.touchThreshold ){
+       this.moveUp();
+     }else if(touchpos - this.touchstart <= -this.touchThreshold){
+       this.moveDown();
+     }else{
+       this.timeout = setTimeout(this.moveBack.bind(this), 1000);
+     }
    }
 
 
