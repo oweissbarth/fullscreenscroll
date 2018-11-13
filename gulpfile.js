@@ -15,6 +15,4 @@ gulp.task('typescript', function () {
         .pipe(minify({ext:{min: '.min.js'}}))
         .pipe(gulp.dest('dist/'));
 });
-gulp.task('default', function() {
-    gulp.start('typescript');
-});
+gulp.task('default', gulp.parallel('typescript'));
