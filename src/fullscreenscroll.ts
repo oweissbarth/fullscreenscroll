@@ -33,7 +33,7 @@ class FullScreenScroll{
    }
 
    private mouseWheelHandler(e: MouseWheelEvent){
-    var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+    var delta = Math.max(-1, Math.min(1, (-e.deltaY || -e.detail)));
     if( delta <= -1 ){
       this.moveDown();
     }else if(delta >= 1){
